@@ -1,0 +1,20 @@
+<div class="product-list">
+  <div class="product-card" *ngFor="let product of products">
+    <img
+      [src]="product.image"
+      alt="{{ product.title }}"
+      class="product-image"
+    />
+    <h2 class="product-name">{{ product.title }}</h2>
+    <p class="product-description">{{ product.description }}</p>
+    <div class="product-price">R$ {{ product.price | number : "1.2-2" }}</div>
+
+    @if (!product.addedToCart) {
+    <button class="btn-buy" (click)="addProductToCart(product)">
+      Adicionar ao Carrinho
+    </button>
+    } @else {
+    <button (click)="removeProductToCart(product)">Remover do Carrinho</button>
+    }
+  </div>
+</div>

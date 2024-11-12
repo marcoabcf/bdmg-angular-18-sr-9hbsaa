@@ -1,14 +1,10 @@
 @use '@angular/material' as mat;
 
-$theme: mat.define-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-  )
-);
+$theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+    ));
 
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -24,3 +20,30 @@ html {
 
 @include mat.core();
 @include mat.color-variants-backwards-compatibility($theme);
+
+button {
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: white;
+}
+
+.mat-mdc-simple-snack-bar {
+  font-size: 1.2em;
+  color: white;
+}
+
+
+::ng-deep .snackbar-error {
+  --mdc-snackbar-container-color: red;
+}
+
+::ng-deep .snackbar-success {
+  --mdc-snackbar-container-color: green;
+}
+
+::ng-deep .snackbar-info {
+  --mdc-snackbar-container-color: blue;
+}
