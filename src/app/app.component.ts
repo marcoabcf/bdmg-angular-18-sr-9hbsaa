@@ -1,10 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import {
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatSnackBarModule,
-} from "@angular/material/snack-bar";
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
 import { HelloComponent } from "./hello.component";
@@ -20,7 +17,6 @@ import { LoaderInterceptor } from "./shared/components/loading/loader.intercepto
     MatButtonModule,
     LoaderComponent,
     MatToolbarModule,
-    MatSnackBarModule,
     HttpClientModule,
   ],
   providers: [

@@ -21,13 +21,21 @@ html {
 @include mat.core();
 @include mat.color-variants-backwards-compatibility($theme);
 
-button {
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  color: white;
+h2 {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 5px 0;
+}
+
+.fullwidth {
+  width: 100%;
 }
 
 .mat-mdc-simple-snack-bar {

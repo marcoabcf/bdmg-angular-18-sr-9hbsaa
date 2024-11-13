@@ -1,6 +1,7 @@
-import { DecimalPipe, NgFor } from "@angular/common";
+import { CurrencyPipe, NgFor } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { CartComponent } from "../cart/cart.component";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { CartService } from "../cart/cart.service";
 import { Product } from "./products.model";
 import { ProductService } from "./products.service";
@@ -8,7 +9,7 @@ import { ProductService } from "./products.service";
 @Component({
   selector: "app-products",
   standalone: true,
-  imports: [NgFor, DecimalPipe, CartComponent],
+  imports: [NgFor, CurrencyPipe, MatCardModule, MatButtonModule],
   templateUrl: "./products.component.html",
   styleUrl: "./products.component.scss",
 })
@@ -16,8 +17,8 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
 
   constructor(
-    private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {

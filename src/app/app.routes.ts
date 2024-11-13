@@ -1,6 +1,8 @@
 import { Routes } from "@angular/router";
-import { ProductsComponent } from "./products/products.component";
 import { CartComponent } from "./cart/cart.component";
+import { CheckoutComponent } from "./checkout/checkout.component";
+import { OrdersComponent } from "./orders/orders.component";
+import { ProductsComponent } from "./products/products.component";
 
 export const routes: Routes = [
   { path: "", redirectTo: "/products", pathMatch: "full" },
@@ -12,12 +14,12 @@ export const routes: Routes = [
     path: "cart",
     component: CartComponent,
   },
-  //   {
-  //       path: 'checkout',
-  //       loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
-  //   },
-  //   {
-  //       path: 'orders',
-  //       loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
-  //   },
+  {
+    path: "checkout",
+    component: CheckoutComponent,
+  },
+  {
+    path: "orders",
+    component: OrdersComponent,
+  },
 ];

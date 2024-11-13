@@ -34,7 +34,6 @@ export class CartService {
   clearCart() {
     this.products = [];
     this.productsSubject.next(this.products);
-    this.snackBar.success("O carrinho foi limpo!");
   }
 
   getItems() {

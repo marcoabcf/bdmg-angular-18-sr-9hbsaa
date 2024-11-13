@@ -1,0 +1,145 @@
+<mat-card class="checkout-container">
+  <h2>Checkout</h2>
+  <div *ngIf="cartItems.length === 0" align="center">
+    Seu carrinho está vazio. <a routerLink="/products">Clique aqui</a> para
+    voltar aos produtos.
+  </div>
+
+  <div *ngIf="cartItems.length > 0" class="checkout-content">
+    <div class="cart-items">
+      <h3 class="cart-title">Itens do Carrinho:</h3>
+
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <img
+          [src]="item.image"
+          alt="{{ item.title }}"
+          class="cart-item-image"
+        />
+        <div class="cart-item-details">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.price | currency : "BRL" }}</p>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-checkout">
+      <p>Valor Total: {{ total | currency : "BRL" }}</p>
+      <mat-form-field appearance="outline" class="form-field fullwidth">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput formControlName="fullName" />
+        <mat-error
+          *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched"
+        >
+          Nome completo é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-grid-list cols="2" rowHeight="90px" gutterSize="16px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="form-field fullwidth">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" />
+            <mat-error
+              *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+            >
+              Email inválido.
+            </mat-error>
+          </mat-form-field></mat-grid-tile
+        >
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="form-field fullwidth">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="phone" type="tel" maxlength="11" />
+            <mat-error
+              *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched"
+            >
+              Telefone deve ter 10 a 11 dígitos.
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-form-field appearance="outline" class="form-field fullwidth">
+        <mat-label>CEP</mat-label>
+        <input
+          matInput
+          formControlName="cep"
+          maxlength="8"
+          (blur)="findAddress()"
+        />
+        <mat-error *ngIf="form.get('cep')?.invalid && form.get('cep')?.touched">
+          CEP deve ter 8 dígitos.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field fullwidth">
+        <mat-label>Logradouro</mat-label>
+        <input matInput formControlName="place" />
+        <mat-error
+          *ngIf="form.get('place')?.invalid && form.get('place')?.touched"
+        >
+          Logradouro é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-grid-list cols="2" rowHeight="90px" gutterSize="16px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="form-field fullwidth">
+            <mat-label for="number">Número</mat-label>
+            <input matInput formControlName="number" />
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="form-field fullwidth">
+            <mat-label for="neighborhood">Bairro</mat-label>
+            <input matInput formControlName="neighborhood" />
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-form-field appearance="outline" class="form-field fullwidth">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="complement" />
+      </mat-form-field>
+
+      <mat-grid-list cols="2" rowHeight="90px" gutterSize="16px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="form-field fullwidth">
+            <mat-label for="city">Cidade</mat-label>
+            <input matInput formControlName="city" />
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="form-field fullwidth">
+            <mat-label for="state">Estado</mat-label>
+            <input matInput formControlName="state" />
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="2" rowHeight="90px" gutterSize="16px">
+        <mat-grid-tile>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="redirectToCart()"
+            class="fullwidth"
+          >
+            Voltar para o Carrinho
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            class="fullwidth"
+            [disabled]="form.invalid"
+          >
+            Finalizar Pedido
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+</mat-card>

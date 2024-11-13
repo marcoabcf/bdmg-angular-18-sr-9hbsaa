@@ -1,0 +1,43 @@
+<mat-card class="orders-container">
+  <h2>Meus Pedidos</h2>
+  <div *ngIf="orders.length === 0" align="center">
+    Não há pedidos feitos. <a routerLink="/products">Clique aqui</a> para voltar
+    aos produtos.
+  </div>
+
+  <div *ngIf="orders.length > 0">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let order of orders">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Pedido ID: {{ order.orderId.split("-")[4] }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ order.total | currency : "BRL" }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <!-- Detalhes do Pedido -->
+        <div class="order-details">
+          <p><strong>Nome:</strong> {{ order.userData?.fullName }}</p>
+          <p>
+            <strong>Endereço:</strong> {{ order.userData?.place }},{{
+              order.userData?.complement ? order.userData?.complement + "," : ""
+            }}
+            {{ order.userData?.neighborhood }}, {{ order.userData?.cep }},
+            {{ order.userData?.city }} -
+            {{ order.userData?.state }}
+          </p>
+
+          <h4>Itens:</h4>
+          <ul>
+            <li *ngFor="let item of order.items">
+              {{ item.title }} - {{ item.price | currency : "BRL" }}
+            </li>
+          </ul>
+          <p><strong>Total:</strong> {{ order.total | currency : "BRL" }}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</mat-card>
